@@ -319,6 +319,27 @@
   .toast.show { transform: translateY(0); opacity: 1; }
 
   .hidden { display: none !important; }
+
+  /* --- Safari 終極防穿透修復（物理消滅法） --- */
+  /* 當卡牌翻轉時，在 0.15 秒（側對螢幕的瞬間）直接把背面變透明 */
+  .card.flipped .card-back {
+    opacity: 0;
+    transition: opacity 0.1s 0.15s;
+  }
+  .card:not(.flipped) .card-back {
+    opacity: 1;
+    transition: opacity 0.1s 0.15s;
+  }
+  
+  /* 順便為「機會卡」也加上一樣的防護，避免抽卡時也破功 */
+  .chance-card-inner.flipped .chance-back {
+    opacity: 0;
+    transition: opacity 0.1s 0.15s;
+  }
+  .chance-card-inner:not(.flipped) .chance-back {
+    opacity: 1;
+    transition: opacity 0.1s 0.15s;
+  }
 </style>
 </head>
 <body>
